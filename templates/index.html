@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: calc(100% - 16px); /* Adjusting width with padding */
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #predictionResult {
+            margin-top: 20px;
+        }
+
+        #predictionExplanation {
+            font-size: 16px;
+        }
+
+        .result {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .hidden{
+            display: none;
+        }
+    </style>
+    <title>Data Input</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Enter Data Point</h1>
+        <form action="/predict" method="POST">
+            <input type="text" id="data1" name="data1" placeholder="Enter the data separated by commas"><br><br>
+            <button type="submit" name="submit_type" value="predict_cluster">Predict Clustering</button>
+            <button type="submit" name="submit_type" value="predict_classification">Predict Classification</button>
+        </form>
+
+        {% if result %}
+        <div id="predictionResult">
+            <div class="result {% if result_success %}success{% else %}danger{% endif %}">
+                <h2>Result:</h2>
+                <p>{{ result }}</p>
+            </div>
+            <div id="predictionExplanation">
+                <h2>Explanation:</h2>
+                <p>{{ explanation }}</p>
+            </div>
+        </div>
+        {% endif %}
+        <br><br>
+
+        <a href="/display_data">View Task3 Resultant Data</a>
+
+    </div>
+</body>
+</html>
